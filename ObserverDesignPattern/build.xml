@@ -1,0 +1,46 @@
+<project name="HW26" default="main" basedir=".">
+    <property environment="env"/>
+
+    <!--  Variables  -->
+    <property name="src.dir" location="src" />
+    <property name="build.dir" location="src/bin" />
+
+
+
+    <path id="project.classpath">
+        <pathelement location="${build.dir}" />
+
+    </path>
+
+    <!-- Deletes the existing build directory-->
+    <target name="clean">
+        <delete dir="${build.dir}" />
+
+    </target>
+
+    <!-- Creates the  build directory-->
+    <target name="makedir" depends="clean">
+        <mkdir dir="${build.dir}" />
+
+    </target>
+
+    <!-- Compiles the java code  -->
+    <target name="compile" depends="clean, makedir" >
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+            <classpath refid="project.classpath" />
+        </javac>
+    </target>
+
+
+    <!-- Execute the java code -->
+    <target name="run" depends="compile">
+        <java classpath="${build.dir}" classname="main.Driver" />
+
+    </target>
+
+
+    <target name="main" depends="compile, run">
+        <description>Main </description>
+    </target>
+
+</project>

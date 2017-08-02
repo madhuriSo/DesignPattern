@@ -25,13 +25,16 @@ public class Driver {
         t3.start();
 
         Thread.sleep(10);
-
+        //Two Step Thread Termination: 
+	// 1. Interrupt the thread 
+	// 2. Set Done which terminates thread
         t1.interrupt();
         t2.interrupt();
         t3.interrupt();
 
         stockRunnable.setDone();
 
+	// First Check if thread is terminated then only exit(get back into main thread)
         t1.join();
         t2.join();
         t3.join();
